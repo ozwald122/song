@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Song {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(255)
+  genre       String?   @db.VarChar(255)
+  releaseDate DateTime? @map("release_date")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  artists Artist[]
+  @@index([name], map: "id_song_name")
+  @@map("songs")
+}
+
+model Artist {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(30)
+  dayOfBirth  String    @map("day_of_birth") @db.VarChar(255)
+  stageName   String    @map("stage_name") @db.VarChar(255)
+  description String
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  songs Song[]
+  @@map("artists")
+}

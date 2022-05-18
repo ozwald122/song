@@ -1,0 +1,24 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "roots": ["<rootDir>"],
+  "modulePaths": [
+    "<rootDir>"
+  ],
+  "moduleDirectories": [
+    "node_modules"
+  ],
+  "setupFiles": ["dotenv/config"],
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "testTimeout": 60000,
+  "forceExit": true,
+  "moduleNameMapper": {
+    "^~(.*)$": "<rootDir>/src/$1"
+  },
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "maxConcurrency": 1,
+  "maxWorkers": 1
+}
